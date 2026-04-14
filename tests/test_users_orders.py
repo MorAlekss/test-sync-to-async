@@ -3,27 +3,31 @@ from src.users.users import get_user, create_user, update_user, delete_user
 from src.orders.orders import get_order, create_order, cancel_order, list_orders
 
 
-def test_get_user():
-    result = get_user(1)
+@pytest.mark.asyncio
+async def test_get_user():
+    result = await get_user(1)
     assert result["id"] == 1
     assert "name" in result
     assert "email" in result
 
 
-def test_create_user():
-    result = create_user("Jane Doe", "jane@example.com")
+@pytest.mark.asyncio
+async def test_create_user():
+    result = await create_user("Jane Doe", "jane@example.com")
     assert result["name"] == "Jane Doe"
     assert result["email"] == "jane@example.com"
 
 
-def test_update_user():
-    result = update_user(1, {"name": "Updated Name"})
+@pytest.mark.asyncio
+async def test_update_user():
+    result = await update_user(1, {"name": "Updated Name"})
     assert result["id"] == 1
     assert result["name"] == "Updated Name"
 
 
-def test_delete_user():
-    result = delete_user(1)
+@pytest.mark.asyncio
+async def test_delete_user():
+    result = await delete_user(1)
     assert result["deleted"] == True
     assert result["id"] == 1
 
