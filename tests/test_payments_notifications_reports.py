@@ -41,20 +41,23 @@ def test_send_push():
     assert result["device_id"] == "device123"
 
 
-def test_generate_report():
-    result = generate_report("sales", {"period": "monthly"})
+@pytest.mark.asyncio
+async def test_generate_report():
+    result = await generate_report("sales", {"period": "monthly"})
     assert result["type"] == "sales"
     assert "data" in result
 
 
-def test_export_report():
-    result = export_report(1, "pdf")
+@pytest.mark.asyncio
+async def test_export_report():
+    result = await export_report(1, "pdf")
     assert result["report_id"] == 1
     assert result["format"] == "pdf"
     assert "url" in result
 
 
-def test_get_report_status():
-    result = get_report_status(1)
+@pytest.mark.asyncio
+async def test_get_report_status():
+    result = await get_report_status(1)
     assert result["report_id"] == 1
     assert result["status"] == "completed"
