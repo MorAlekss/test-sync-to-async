@@ -28,26 +28,30 @@ def test_delete_user():
     assert result["id"] == 1
 
 
-def test_get_order():
-    result = get_order(1)
+@pytest.mark.asyncio
+async def test_get_order():
+    result = await get_order(1)
     assert result["id"] == 1
     assert result["status"] == "pending"
 
 
-def test_create_order():
-    result = create_order(1, ["item1", "item2"])
+@pytest.mark.asyncio
+async def test_create_order():
+    result = await create_order(1, ["item1", "item2"])
     assert result["user_id"] == 1
     assert result["items"] == ["item1", "item2"]
     assert result["status"] == "created"
 
 
-def test_cancel_order():
-    result = cancel_order(1)
+@pytest.mark.asyncio
+async def test_cancel_order():
+    result = await cancel_order(1)
     assert result["id"] == 1
     assert result["status"] == "cancelled"
 
 
-def test_list_orders():
-    result = list_orders(1)
+@pytest.mark.asyncio
+async def test_list_orders():
+    result = await list_orders(1)
     assert isinstance(result, list)
     assert len(result) > 0
